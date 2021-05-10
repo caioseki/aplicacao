@@ -3,12 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app, db
 from app.model.tables import Aluno
 
-
 @app.route("/")
 def index():
     aluno = Aluno.query.all()
     return render_template("index.html", aluno=aluno)
-
 
 @app.route("/add", methods=['GET', 'POST'])
 def add():
@@ -24,8 +22,6 @@ def add():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template("add.html")
-
-
 @app.route("/edit/<int:ra>", methods=['GET', 'POST'])
 def edit(ra):
     aluno = Aluno.query.get(ra)
@@ -40,7 +36,6 @@ def edit(ra):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template("edit.html", aluno=aluno)
-
 
 @app.route("/delete/<int:ra>")
 def delete(ra):
